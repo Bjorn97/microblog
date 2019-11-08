@@ -1,7 +1,7 @@
 """Initial version
 
 Revision ID: a524776a1ebb
-Revises: 
+Revises:
 Create Date: 2019-10-04 16:24:02.694881
 
 """

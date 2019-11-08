@@ -15,7 +15,7 @@ docker-compose file [split in multiple files](https://medium.com/vteam/configure
 `docker.errors.DockerException: Credentials store error: StoreError('docker-credential-docker-credential-desktop.exe not installed or not available in PATH',)`
 
 Solution:
-Open `~/.docker/config.json` and add `.exe` to the `credsStore`. 
+Open `~/.docker/config.json` and add `.exe` to the `credsStore`.
 ```
 "credsStore":"desktop.exe"
 ```

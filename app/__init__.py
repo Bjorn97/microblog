@@ -38,7 +38,7 @@ def create_app(config_class=ProdConfig):
     login.init_app(app)
     moment.init_app(app)
     bootstrap.init_app(app)
-    
+
 
     #pylint: disable=wrong-import-position, cyclic-import
     from app.errors import bp as errors_bp
