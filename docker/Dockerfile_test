@@ -1,0 +1,36 @@
+FROM python:3.6-alpine
+
+RUN adduser -D microblog
+
+WORKDIR /home/microblog
+
+COPY requirements requirements
+
+RUN python -m venv venv
+
+RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev python-dev py-pip build-base \
+  && venv/bin/pip install --upgrade pip \
+  && venv/bin/pip install -r requirements/test.txt \
+  && apk del build-dependencies
+
+RUN apk update
+RUN apk upgrade
+RUN apk add make
+
+COPY app app
+COPY migrations migrations
+COPY microblog.py test.sh ./
+COPY tests tests
+COPY Makefile Makefile
+COPY pytest.ini pytest.ini
+COPY .pylintrc .pylintrc
+RUN chmod +x test.sh
+RUN chown -R microblog:microblog ./
+RUN ls -l
+
+ENV FLASK_APP microblog.py
+
+USER microblog
+ARG CACHEBUST=1
+RUN ./test.sh
+#ENTRYPOINT ['./test.sh']
